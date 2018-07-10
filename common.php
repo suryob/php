@@ -55,6 +55,44 @@
 		
 		return $xml;
 	}
+	function curlPost($url,$param){
+		$ch = curl_init();
+		if($ch==false){
+			die('Failed to create curl object');
+		}
+		curl_setopt($ch,CURLOPT_URL, $url);
+		curl_setopt($ch,CURLOPT_POST, true);
+		curl_setopt($ch,CURLOPT_POSTFIELDS, $param);
+		curl_setopt ($ch, CURLOPT_RETURNTRANSFER, true);
+		curl_setopt($ch, CURLOPT_TIMEOUT, 90);
+		//execute post
+		$result = curl_exec($ch);
+		$err = curl_error($curl);
+		
+		//close connection
+		curl_close($ch);
+		if ($err) {
+		  echo "cURL Error #:" . $err;
+		} else {
+		  echo $result;
+		}
+	}
+	function curlGet($url){
+		$ch = curl_init();
+		if($ch==false){
+			die('Failed to create curl object');
+		}
+		// $timeout = 40;
+		curl_setopt($ch,CURLOPT_URL,$url);
+		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+		// curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, $timeout);
+		curl_setopt ($ch, CURLOPT_SSL_VERIFYHOST, 0);
+		curl_setopt ($ch, CURLOPT_SSL_VERIFYPEER, 0);
+		$data = curl_exec($ch);
+		curl_close($ch);
+		// unset($ch);
+		return $data;
+	}
 	$ret["nol"]="0";
 	$ret["satu"]["dua"]="01";
 	$ret["tiga"]["empat"]["lima"]="012";
