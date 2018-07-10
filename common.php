@@ -1,4 +1,5 @@
 <?php
+	date_default_timezone_set("Asia/Jakarta");
 	$uniqid = uniqid();
 	function logit($str){
 		global $uniqid;
